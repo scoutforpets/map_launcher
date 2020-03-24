@@ -66,7 +66,13 @@ String _getMapUrl(
   switch (mapType) {
     case MapType.google:
       if (Platform.isIOS) {
-        return 'comgooglemaps://?q=$title($description)';
+        var url = 'comgooglemaps://?q=$title';
+
+        if (description.isNotEmpty) {
+          return '$url($description)';
+        }
+
+        return url;
       }
       return 'geo:0,0?q=${coords.latitude},${coords.longitude}($title)';
     case MapType.amap:
